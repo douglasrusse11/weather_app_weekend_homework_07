@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import CityWeather from './CityWeather';
+
 const WeatherApp = () => {
     const cities = [
         {
@@ -55,7 +57,7 @@ const WeatherApp = () => {
                     )
                 })}
         </select>
-        <h2>{city ? city.name : "No city selected"}</h2>
+        {city ? <CityWeather city={city} /> : <h2>No city selected</h2>}
         </>
     );
 }
