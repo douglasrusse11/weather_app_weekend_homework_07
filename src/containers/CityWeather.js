@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import CurrentWeather from '../components/CurrentWeather';
 import WeatherGraph from '../components/WeatherGraph';
 import CityMap from '../components/CityMap';
+import './CityWeather.css';
 
 const CityWeather = ({ city }) => {
 
     const [weatherData, setWeatherData] = useState(null);
 
     useEffect(() => {
-        getWeatherData(city)
+        getWeatherData(city);
     },[city]);
 
     const getWeatherData = (city) => {
@@ -22,12 +23,11 @@ const CityWeather = ({ city }) => {
         <>
             <h2>{city.name}</h2>
             <p>Latitude: {city.latitude}, Longitude: {city.longitude}</p>
+            <div id="current-weather-city-map">
+            {weatherData &&  <CurrentWeather currentWeather={weatherData.current_weather} />}
             <CityMap city={city} />
-            {weatherData && 
-            <>
-            <CurrentWeather currentWeather={weatherData.current_weather} />
-            <WeatherGraph hourlyWeather={weatherData.hourly}/>
-            </>}
+            </div>
+            {weatherData && <WeatherGraph hourlyWeather={weatherData.hourly}/>}
         </>
     );
 }

@@ -43,7 +43,7 @@ const WeatherApp = () => {
     const [city, setCity] = useState(null);
 
     const handleCityChange = (event) => {
-        setCity(cities.find((city) => city.name === event.target.value))
+        setCity(cities.find((city) => city.name === event.target.value));
     }
     
     return (
