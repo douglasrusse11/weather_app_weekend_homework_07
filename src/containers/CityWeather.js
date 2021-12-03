@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import CurrentWeather from '../components/CurrentWeather';
 import WeatherGraph from '../components/WeatherGraph';
+import CityMap from '../components/CityMap';
 
 const CityWeather = ({ city }) => {
 
@@ -21,6 +22,7 @@ const CityWeather = ({ city }) => {
         <>
             <h2>{city.name}</h2>
             <p>Latitude: {city.latitude}, Longitude: {city.longitude}</p>
+            <CityMap city={city} />
             {weatherData && 
             <>
             <CurrentWeather currentWeather={weatherData.current_weather} />
