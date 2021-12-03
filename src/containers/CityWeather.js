@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import CurrentWeather from '../components/CurrentWeather'
+import CurrentWeather from '../components/CurrentWeather';
+import WeatherGraph from '../components/WeatherGraph';
 
 const CityWeather = ({ city }) => {
 
@@ -20,7 +21,11 @@ const CityWeather = ({ city }) => {
         <>
             <h2>{city.name}</h2>
             <p>Latitude: {city.latitude}, Longitude: {city.longitude}</p>
-            {weatherData && <CurrentWeather currentWeather={weatherData.current_weather} />}
+            {weatherData && 
+            <>
+            <CurrentWeather currentWeather={weatherData.current_weather} />
+            <WeatherGraph hourlyWeather={weatherData.hourly}/>
+            </>}
         </>
     );
 }
