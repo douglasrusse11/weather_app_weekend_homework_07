@@ -1,8 +1,9 @@
 import './App.css';
+import WeatherApp from './containers/WeatherApp'
 
 function App() {
   return (
-    <h1>App goes here</h1>
+    <WeatherApp />
   );
 }
 
