@@ -20,7 +20,6 @@ const WeatherGraph = ({ hourlyWeather }) => {
           title: "Today's Forecast",
           curveType: 'function',
           legend: { position: 'bottom' },
-          width: "908px"
         };
 
         const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

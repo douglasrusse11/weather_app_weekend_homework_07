@@ -9,11 +9,11 @@ const CityWeather = ({ city }) => {
     const [weatherData, setWeatherData] = useState(null);
 
     useEffect(() => {
-        getWeatherData(city);
+        getWeatherData(city)
     },[city]);
 
     const getWeatherData = (city) => {
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current_weather=true&hourly=temperature_2m`)
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current_weather=true&hourly=temperature_2m&daily=precipitation_hours&timezone=Europe%2FLondon`)
             .then(res => res.json())
             .then(data => setWeatherData(data))
             .catch(error => console.error(error))
@@ -24,7 +24,7 @@ const CityWeather = ({ city }) => {
             <h2>{city.name}</h2>
             <p>Latitude: {city.latitude}, Longitude: {city.longitude}</p>
             <div id="current-weather-city-map">
-            {weatherData &&  <CurrentWeather currentWeather={weatherData.current_weather} />}
+            {weatherData &&  <CurrentWeather currentWeather={weatherData.current_weather} daily={weatherData.daily} />}
             <CityMap city={city} />
             </div>
             {weatherData && <WeatherGraph hourlyWeather={weatherData.hourly}/>}

@@ -1,6 +1,6 @@
 import './CurrentWeather.css';
 
-const CurrentWeather = ({ currentWeather }) => {
+const CurrentWeather = ({ currentWeather, daily }) => {
 
     const windDirectionStyle = {
         position: "fixed",
@@ -13,6 +13,7 @@ const CurrentWeather = ({ currentWeather }) => {
             <h3>Current Weather</h3>
             <p>Temperature: {currentWeather.temperature}&deg;C</p>
             <p>Wind Speed: {currentWeather.windspeed} km/h <span style={windDirectionStyle}>&uarr;</span></p>
+            <p>Precipitation: {daily.precipitation_hours[0]} mm</p>
         </div>
     );
 }
