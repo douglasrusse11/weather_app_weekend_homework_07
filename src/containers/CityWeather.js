@@ -13,7 +13,7 @@ const CityWeather = ({ city }) => {
     },[city]);
 
     const getWeatherData = (city) => {
-        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current_weather=true&hourly=temperature_2m&daily=precipitation_hours&timezone=Europe%2FLondon`)
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,cloudcover&daily=precipitation_sum&timezone=Europe%2FLondon`)
             .then(res => res.json())
             .then(data => setWeatherData(data))
             .catch(error => console.error(error))

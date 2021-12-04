@@ -1,4 +1,26 @@
+import { useState } from 'react';
+
 const WeatherGraph = ({ hourlyWeather }) => {
+
+    const [weatherVariable, setWeatherVariable] = useState('Temperature')
+
+    const weatherVariables = {
+      "Temperature": "temperature_2m",
+      "Apparent Temperature": "apparent_temperature",
+      "Relative Humidity": "relativehumidity_2m",
+      "Precipitation": "precipitation",
+      "Cloud Cover": "cloudcover"
+    };
+
+    const weatherVariableOptions = [];
+    for (let key in weatherVariables) {
+      weatherVariableOptions.push(<option value={key}>{key}</option>);
+    }
+
+    const handleWeatherVariableChange = (event) => {
+      setWeatherVariable(event.target.value);
+    }
+    
     const google = window.google;
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -9,17 +31,16 @@ const WeatherGraph = ({ hourlyWeather }) => {
 
       function drawChart() {
 
-        const hourlyTemperature = [['Time', 'Temperature']]
+        const hourlyTemperature = [['Time', `${weatherVariable}`]]
         hourlyWeather.time.slice(0, 24).forEach((time, index) => {
-            hourlyTemperature.push([time.split('T')[1], hourlyWeather.temperature_2m[index]])
+            hourlyTemperature.push([time.split('T')[1].split(':')[0], hourlyWeather[weatherVariables[weatherVariable]][index]])
         })
 
         const data = google.visualization.arrayToDataTable(hourlyTemperature);
 
         const options = {
-          title: "Today's Forecast",
           curveType: 'function',
-          legend: { position: 'bottom' },
+          legend: {position: 'none'}
         };
 
         const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -28,7 +49,13 @@ const WeatherGraph = ({ hourlyWeather }) => {
       }
 
       return (
-        <div id="curve_chart" style={style}></div>
+        <>
+        <h3>Today's forecast</h3>
+        <select onChange={handleWeatherVariableChange}>
+          {weatherVariableOptions}
+        </select>
+        <div id="curve_chart" style={style}/>
+        </>
       )
 }
 
