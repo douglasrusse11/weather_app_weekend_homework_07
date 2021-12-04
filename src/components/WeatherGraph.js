@@ -33,14 +33,20 @@ const WeatherGraph = ({ hourlyWeather }) => {
 
         const hourlyTemperature = [['Time', `${weatherVariable}`]]
         hourlyWeather.time.slice(0, 24).forEach((time, index) => {
-            hourlyTemperature.push([time.split('T')[1].split(':')[0], hourlyWeather[weatherVariables[weatherVariable]][index]])
+            hourlyTemperature.push([new Date(time), hourlyWeather[weatherVariables[weatherVariable]][index]])
         })
 
         const data = google.visualization.arrayToDataTable(hourlyTemperature);
 
         const options = {
           curveType: 'function',
-          legend: {position: 'none'}
+          legend: {position: 'none'},
+          hAxis: {
+            title: 'Time',
+          },
+          vAxis: {
+            title: weatherVariable
+          }
         };
 
         const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
