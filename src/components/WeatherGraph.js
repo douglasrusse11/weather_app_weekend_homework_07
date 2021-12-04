@@ -13,8 +13,10 @@ const WeatherGraph = ({ hourlyWeather }) => {
     };
 
     const weatherVariableOptions = [];
+    let i =0;
     for (let key in weatherVariables) {
-      weatherVariableOptions.push(<option value={key}>{key}</option>);
+      weatherVariableOptions.push(<option value={key} key={`weatherVariable_${i}`}>{key}</option>);
+      i++;
     }
 
     const handleWeatherVariableChange = (event) => {
