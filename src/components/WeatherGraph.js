@@ -45,9 +45,18 @@ const WeatherGraph = ({ hourlyWeather }) => {
           legend: {position: 'none'},
           hAxis: {
             title: 'Time',
+            gridlines: {
+              color: '#fff'
+            },
+            minorGridlines: {
+              count: 0
+            }
           },
           vAxis: {
-            title: weatherVariable
+            title: weatherVariable,
+            minorGridlines: {
+              count: 0
+            }
           }
         };
 
